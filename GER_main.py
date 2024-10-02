@@ -12,7 +12,7 @@ db_host = 'localhost'
 db_user = 'root'
 db_password = 'ed%f6!drt§4d'
 db_name = 'reisewarnung'
-table_name = 'travel_advisories_ger'
+table_name = 'travel_advisories_de'
 
 # URL-encode das Passwort
 encoded_password = quote(db_password)
@@ -105,8 +105,13 @@ while start_date < current_date:
                     # Text aufteilen, um Land und Warnung zu extrahieren
                     # Nimm nur das erste und letzte Element (Land und Warnung), ignoriere den Mittelteil
                     parts = text.split()
+
                     if len(parts) > 1:
-                        country = parts[0] # Land
+                        if ":" in text:
+                            countryIf = text.split(":")[0]
+                            country = countryIf
+                        else:
+                            country = parts[0] # Land
                         warning_type = parts[-1] # Reisewarnung oder Teilreisewarnung
                         warning_type= warning_type.replace(')','')
                         warning_type = warning_type.replace('(', '')
@@ -131,9 +136,9 @@ while start_date < current_date:
     time.sleep(12)
 
 # Die gesammelten Daten in einen DataFrame speichern
-travel_advisories_ger = pd.DataFrame(all_data, columns=['Datum', 'Land', 'Warnung', 'Date', 'origin'])
-travel_advisories_ger.to_sql(table_name, engine, if_exists='append', index=False)
+travel_advisories_de = pd.DataFrame(all_data, columns=['Datum', 'country', 'Level', 'Date', 'origin'])
+travel_advisories_de.to_sql(table_name, engine, if_exists='append', index=False)
 # DataFrame anzeigen
-print(travel_advisories_ger)
+print(travel_advisories_de)
 
 

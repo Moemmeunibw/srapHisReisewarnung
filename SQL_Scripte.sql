@@ -16,10 +16,10 @@ SET Level_numeric = CASE
     WHEN Level = 'Level 3: Reconsider Travel' THEN 3
     ELSE NULL -- Falls ein Level nicht im Mapping enthalten ist, wird NULL gesetzt
 END;
-use reisewarnung;
+
 
 ##############AUS#############
-
+use reisewarnung;
 -- Neue Spalte 'Level_numeric' hinzufügen
 ALTER TABLE travel_advisories_aus
 ADD COLUMN Level_numeric INT;
@@ -740,4 +740,244 @@ SET Country_ISO = CASE
     WHEN Country IN ('Gambia, The') THEN 'GMB'
     WHEN Country IN ('Brunei Darussalam') THEN 'BRN'
     ELSE NULL -- Falls kein Mapping vorhanden ist
+END;
+
+
+
+#################Germany############
+use reisewarnung;
+-- Neue Spalte 'Country_ISO' hinzufügen (falls noch nicht vorhanden)
+ALTER TABLE travel_advisories_de
+ADD COLUMN Country_ISO INT;
+-- Die Spalte 'Country_ISO' basierend auf der Spalte 'country' aktualisieren
+UPDATE reisewarnung.travel_advisories_de
+SET Country_ISO = CASE
+    WHEN country LIKE '%Afghanistan%' THEN 'AFG'
+    WHEN country LIKE '%Albanien%' THEN 'ALB'
+    WHEN country LIKE '%Algerien%' THEN 'DZA'
+    WHEN country LIKE '%Andorra%' THEN 'AND'
+    WHEN country LIKE '%Angola%' THEN 'AGO'
+    WHEN country LIKE '%Antigua und Barbuda%' THEN 'ATG'
+    WHEN country LIKE '%Argentinien%' THEN 'ARG'
+    WHEN country LIKE '%Armenien%' THEN 'ARM'
+    WHEN country LIKE '%Australien%' THEN 'AUS'
+    WHEN country LIKE '%Österreich%' THEN 'AUT'
+    WHEN country LIKE '%Aserbaidschan%' THEN 'AZE'
+    WHEN country LIKE '%Bahamas%' THEN 'BHS'
+    WHEN country LIKE '%Bahrain%' THEN 'BHR'
+    WHEN country LIKE '%Bangladesch%' THEN 'BGD'
+    WHEN country LIKE '%Barbados%' THEN 'BRB'
+    WHEN country LIKE '%Weißrussland%' THEN 'BLR'
+    WHEN country LIKE '%Belgien%' THEN 'BEL'
+    WHEN country LIKE '%Belize%' THEN 'BLZ'
+    WHEN country LIKE '%Benin%' THEN 'BEN'
+    WHEN country LIKE '%Bhutan%' THEN 'BTN'
+    WHEN country LIKE '%Bolivien%' THEN 'BOL'
+    WHEN country LIKE '%Bosnien und Herzegowina%' THEN 'BIH'
+    WHEN country LIKE '%Botswana%' THEN 'BWA'
+    WHEN country LIKE '%Brasilien%' THEN 'BRA'
+    WHEN country LIKE '%Brunei%' THEN 'BRN'
+    WHEN country LIKE '%Bulgarien%' THEN 'BGR'
+    WHEN country LIKE '%BurkinaFaso%' THEN 'BFA'
+    WHEN country LIKE '%Burundi%' THEN 'BDI'
+    WHEN country LIKE '%KapVerde%' THEN 'CPV'
+    WHEN country LIKE '%Kambodscha%' THEN 'KHM'
+    WHEN country LIKE '%Kamerun%' THEN 'CMR'
+    WHEN country LIKE '%Kanada%' THEN 'CAN'
+    WHEN country LIKE '%Zentralafrikanische Republik%' THEN 'CAF'
+    WHEN country LIKE '%Tschad%' THEN 'TCD'
+    WHEN country LIKE '%Chile%' THEN 'CHL'
+    WHEN country LIKE '%China%' THEN 'CHN'
+    WHEN country LIKE '%Kolumbien%' THEN 'COL'
+    WHEN country LIKE '%Komoren%' THEN 'COM'
+    WHEN country LIKE '%Kongo%' THEN 'COG'
+    WHEN country LIKE '%CostaRica%' THEN 'CRI'
+    WHEN country LIKE '%Kroatien%' THEN 'HRV'
+    WHEN country LIKE '%Kuba%' THEN 'CUB'
+    WHEN country LIKE '%Zypern%' THEN 'CYP'
+    WHEN country LIKE '%Tschechien%' THEN 'CZE'
+    WHEN country LIKE '%Demokratische Republik Kongo%' THEN 'COD'
+    WHEN country LIKE '%Dänemark%' THEN 'DNK'
+    WHEN country LIKE '%Dschibuti%' THEN 'DJI'
+    WHEN country LIKE '%Dominica%' THEN 'DMA'
+    WHEN country LIKE '%Dominikanische Republik%' THEN 'DOM'
+    WHEN country LIKE '%Ecuador%' THEN 'ECU'
+    WHEN country LIKE '%Ägypten%' THEN 'EGY'
+    WHEN country LIKE '%ElSalvador%' THEN 'SLV'
+    WHEN country LIKE '%Äquatorialguinea%' THEN 'GNQ'
+    WHEN country LIKE '%Eritrea%' THEN 'ERI'
+    WHEN country LIKE '%Estland%' THEN 'EST'
+    WHEN country LIKE '%Eswatini%' THEN 'SWZ'
+    WHEN country LIKE '%Äthiopien%' THEN 'ETH'
+    WHEN country LIKE '%Fidschi%' THEN 'FJI'
+    WHEN country LIKE '%Finnland%' THEN 'FIN'
+    WHEN country LIKE '%Frankreich%' THEN 'FRA'
+    WHEN country LIKE '%Gabun%' THEN 'GAB'
+    WHEN country LIKE '%Gambia%' THEN 'GMB'
+    WHEN country LIKE '%Georgien%' THEN 'GEO'
+    WHEN country LIKE '%Deutschland%' THEN 'DEU'
+    WHEN country LIKE '%Ghana%' THEN 'GHA'
+    WHEN country LIKE '%Griechenland%' THEN 'GRC'
+    WHEN country LIKE '%Grenada%' THEN 'GRD'
+    WHEN country LIKE '%Guatemala%' THEN 'GTM'
+    WHEN country LIKE '%Guinea%' THEN 'GIN'
+    WHEN country LIKE '%Guinea-Bissau%' THEN 'GNB'
+    WHEN country LIKE '%Guyana%' THEN 'GUY'
+    WHEN country LIKE '%Haiti%' THEN 'HTI'
+    WHEN country LIKE '%Honduras%' THEN 'HND'
+    WHEN country LIKE '%Ungarn%' THEN 'HUN'
+    WHEN country LIKE '%Island%' THEN 'ISL'
+    WHEN country LIKE '%Indien%' THEN 'IND'
+    WHEN country LIKE '%Indonesien%' THEN 'IDN'
+    WHEN country LIKE '%Iran%' THEN 'IRN'
+    WHEN country LIKE '%Irak%' THEN 'IRQ'
+    WHEN country LIKE '%Irland%' THEN 'IRL'
+    WHEN country LIKE '%Israel%' THEN 'ISR'
+    WHEN country LIKE '%Italien%' THEN 'ITA'
+    WHEN country LIKE '%Jamaika%' THEN 'JAM'
+    WHEN country LIKE '%Japan%' THEN 'JPN'
+    WHEN country LIKE '%Jordanien%' THEN 'JOR'
+    WHEN country LIKE '%Kasachstan%' THEN 'KAZ'
+    WHEN country LIKE '%Kenia%' THEN 'KEN'
+    WHEN country LIKE '%Kiribati%' THEN 'KIR'
+    WHEN country LIKE '%Nordkorea%' THEN 'PRK'
+    WHEN country LIKE '%Südkorea%' THEN 'KOR'
+    WHEN country LIKE '%Kuwait%' THEN 'KWT'
+    WHEN country LIKE '%Kirgisistan%' THEN 'KGZ'
+    WHEN country LIKE '%Laos%' THEN 'LAO'
+    WHEN country LIKE '%Lettland%' THEN 'LVA'
+    WHEN country LIKE '%Libanon%' THEN 'LBN'
+    WHEN country LIKE '%Lesotho%' THEN 'LSO'
+    WHEN country LIKE '%Liberia%' THEN 'LBR'
+    WHEN country LIKE '%Libyen%' THEN 'LBY'
+    WHEN country LIKE '%Liechtenstein%' THEN 'LIE'
+    WHEN country LIKE '%Litauen%' THEN 'LTU'
+    WHEN country LIKE '%Luxemburg%' THEN 'LUX'
+    WHEN country LIKE '%Madagaskar%' THEN 'MDG'
+    WHEN country LIKE '%Malawi%' THEN 'MWI'
+    WHEN country LIKE '%Malaysia%' THEN 'MYS'
+    WHEN country LIKE '%Malediven%' THEN 'MDV'
+    WHEN country LIKE '%Mali%' THEN 'MLI'
+    WHEN country LIKE '%Malta%' THEN 'MLT'
+    WHEN country LIKE '%Marshallinseln%' THEN 'MHL'
+    WHEN country LIKE '%Mauretanien%' THEN 'MRT'
+    WHEN country LIKE '%Mauritius%' THEN 'MUS'
+    WHEN country LIKE '%Mexiko%' THEN 'MEX'
+    WHEN country LIKE '%Mikronesien%' THEN 'FSM'
+    WHEN country LIKE '%Moldawien%' THEN 'MDA'
+    WHEN country LIKE '%Monaco%' THEN 'MCO'
+    WHEN country LIKE '%Mongolei%' THEN 'MNG'
+    WHEN country LIKE '%Montenegro%' THEN 'MNE'
+    WHEN country LIKE '%Marokko%' THEN 'MAR'
+    WHEN country LIKE '%Mosambik%' THEN 'MOZ'
+    WHEN country LIKE '%Myanmar%' THEN 'MMR'
+    WHEN country LIKE '%Namibia%' THEN 'NAM'
+    WHEN country LIKE '%Nauru%' THEN 'NRU'
+    WHEN country LIKE '%Nepal%' THEN 'NPL'
+    WHEN country LIKE '%Niederlande%' THEN 'NLD'
+    WHEN country LIKE '%Neuseeland%' THEN 'NZL'
+    WHEN country LIKE '%Nicaragua%' THEN 'NIC'
+    WHEN country LIKE '%Niger%' THEN 'NER'
+    WHEN country LIKE '%Nigeria%' THEN 'NGA'
+    WHEN country LIKE '%Nordmazedonien%' THEN 'MKD'
+    WHEN country LIKE '%Norwegen%' THEN 'NOR'
+    WHEN country LIKE '%Oman%' THEN 'OMN'
+    WHEN country LIKE '%Pakistan%' THEN 'PAK'
+    WHEN country LIKE '%Palau%' THEN 'PLW'
+    WHEN country LIKE '%Panama%' THEN 'PAN'
+    WHEN country LIKE '%Papua-Neuguinea%' THEN 'PNG'
+    WHEN country LIKE '%Paraguay%' THEN 'PRY'
+    WHEN country LIKE '%Peru%' THEN 'PER'
+    WHEN country LIKE '%Philippinen%' THEN 'PHL'
+    WHEN country LIKE '%Polen%' THEN 'POL'
+    WHEN country LIKE '%Portugal%' THEN 'PRT'
+    WHEN country LIKE '%Katar%' THEN 'QAT'
+    WHEN country LIKE '%Rumänien%' THEN 'ROU'
+    WHEN country LIKE '%Russland%' THEN 'RUS'
+    WHEN country LIKE '%Ruanda%' THEN 'RWA'
+    WHEN country LIKE '%St.KittsundNevis%' THEN 'KNA'
+    WHEN country LIKE '%St.Lucia%' THEN 'LCA'
+    WHEN country LIKE '%St.Vincent und die Grenadinen%' THEN 'VCT'
+    WHEN country LIKE '%Samoa%' THEN 'WSM'
+    WHEN country LIKE '%SanMarino%' THEN 'SMR'
+    WHEN country LIKE '%SãoTomé und Príncipe%' THEN 'STP'
+    WHEN country LIKE '%Saudi-Arabien%' THEN 'SAU'
+    WHEN country LIKE '%Senegal%' THEN 'SEN'
+    WHEN country LIKE '%Serbien%' THEN 'SRB'
+    WHEN country LIKE '%Seychellen%' THEN 'SYC'
+    WHEN country LIKE '%SierraLeone%' THEN 'SLE'
+    WHEN country LIKE '%Singapur%' THEN 'SGP'
+    WHEN country LIKE '%Slowakei%' THEN 'SVK'
+    WHEN country LIKE '%Slowenien%' THEN 'SVN'
+    WHEN country LIKE '%Salomonen%' THEN 'SLB'
+    WHEN country LIKE '%Somalia%' THEN 'SOM'
+    WHEN country LIKE '%Südafrika%' THEN 'ZAF'
+    WHEN country LIKE '%Südsudan%' THEN 'SSD'
+    WHEN country LIKE '%Spanien%' THEN 'ESP'
+    WHEN country LIKE '%SriLanka%' THEN 'LKA'
+    WHEN country LIKE '%Sudan%' THEN 'SDN'
+    WHEN country LIKE '%Suriname%' THEN 'SUR'
+    WHEN country LIKE '%Schweden%' THEN 'SWE'
+    WHEN country LIKE '%Schweiz%' THEN 'CHE'
+    WHEN country LIKE '%Syrien%' THEN 'SYR'
+    WHEN country LIKE '%Taiwan%' THEN 'TWN'
+    WHEN country LIKE '%Tadschikistan%' THEN 'TJK'
+    WHEN country LIKE '%Tansania%' THEN 'TZA'
+    WHEN country LIKE '%Thailand%' THEN 'THA'
+    WHEN country LIKE '%Timor-Leste%' THEN 'TLS'
+    WHEN country LIKE '%Togo%' THEN 'TGO'
+    WHEN country LIKE '%Tonga%' THEN 'TON'
+    WHEN country LIKE '%Trinidad und Tobago%' THEN 'TTO'
+    WHEN country LIKE '%Tunesien%' THEN 'TUN'
+    WHEN country LIKE '%Türkei%' THEN 'TUR'
+    WHEN country LIKE '%Turkmenistan%' THEN 'TKM'
+    WHEN country LIKE '%Tuvalu%' THEN 'TUV'
+    WHEN country LIKE '%Uganda%' THEN 'UGA'
+    WHEN country LIKE '%Ukraine%' THEN 'UKR'
+    WHEN country LIKE '%Vereinigte Arabische Emirate%' THEN 'ARE'
+    WHEN country LIKE '%Vereinigtes Königreich%' THEN 'GBR'
+    WHEN country LIKE '%Vereinigte Staaten%' THEN 'USA'
+    WHEN country LIKE '%Uruguay%' THEN 'URY'
+    WHEN country LIKE '%Usbekistan%' THEN 'UZB'
+    WHEN country LIKE '%Vanuatu%' THEN 'VUT'
+    WHEN country LIKE '%Vatikanstadt%' THEN 'VAT'
+    WHEN country LIKE '%Venezuela%' THEN 'VEN'
+    WHEN country LIKE '%Vietnam%' THEN 'VNM'
+    WHEN country LIKE '%Jemen%' THEN 'YEM'
+    WHEN country LIKE '%Sambia%' THEN 'ZMB'
+    WHEN country LIKE '%Simbabwe%' THEN 'ZWE'
+    WHEN country LIKE '%Belarus%' THEN 'BLR'
+    WHEN country LIKE '%Costa Rica%' THEN 'CRI'
+    WHEN country LIKE '%Moldau%' THEN 'MDA'
+    WHEN country LIKE '%Simbabwe%' THEN 'ZWE'
+    WHEN country LIKE '%El Salvador%' THEN 'SLV'
+    WHEN country LIKE '%Burkina Faso%' THEN 'BFA'
+    WHEN country LIKE '%Sierra Leone%' THEN 'SLE'
+    ELSE NULL -- Falls kein Mapping vorhanden ist
+END;
+
+
+ALTER TABLE travel_advisories_de
+ADD COLUMN Level_numeric INT;
+
+-- Die neue Spalte mit den numerischen Werten basierend auf dem Mapping aktualisieren
+UPDATE travel_advisories_de
+SET Level_numeric = CASE
+    WHEN Level = 'Teilreisewarnung' THEN 3
+    WHEN Level = 'Reisewarnung' THEN 4
+    WHEN Level = 'None' THEN 1
+END;
+
+############UK##############
+-- Danach die Spalte basierend auf den Bedingungen aktualisieren
+use reisewarnung;
+ALTER TABLE travel_advisories_uk
+ADD COLUMN Level_numeric INT;
+
+-- Danach die Spalte basierend auf den Bedingungen aktualisieren
+UPDATE travel_advisories_uk
+SET Level_numeric = CASE
+    WHEN Advice LIKE '%against%' AND Advice LIKE '%essential%' THEN 3
+    WHEN Advice LIKE '%against%' THEN 4
+    ELSE 1
 END;
